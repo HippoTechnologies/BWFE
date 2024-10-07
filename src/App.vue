@@ -8,7 +8,7 @@
 
 <script>
 import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { state } from './store/store';
 import NavBar from './components/NavBar.vue';
 import EmployeeNavBar from './components/EmployeeNavBar.vue';
 
@@ -18,8 +18,7 @@ export default {
     EmployeeNavBar
   },
   setup() {
-    const route = useRoute();
-    const isEmployee = computed(() => route.name === 'Employee');  // Checking if the route is employee page
+    const isEmployee = computed(() => state.isEmployee);
 
     return {
       isEmployee

@@ -42,6 +42,7 @@
 
 <script>
 import RegistrationForm from '@/components/RegistrationForm.vue';
+import { state } from '../store/store';
 
 export default {
   name: 'Login',
@@ -57,8 +58,8 @@ export default {
   },
   methods: {
     login() {
+      state.isEmployee = true;
       this.$router.push({ name: 'Employee' });
-      // Optionally set a global state here to mark the user as an employee
     }
   }
 };

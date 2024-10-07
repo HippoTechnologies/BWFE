@@ -5,6 +5,12 @@ import ContactPage from '@/views/ContactPage.vue';
 import Login from '@/views/LoginPage.vue';
 import EmployeePage from '@/views/EmployeePage.vue';
 import Schedule from '@/views/Schedule.vue';
+import Settings from '@/views/Settings.vue';
+import Sales from '@/views/Sales.vue';
+import Ingredients from '@/views/Ingredients.vue';
+import Recipe from '@/views/Recipe.vue';
+import ProfileSettings from '@/components/ProfileSettings.vue';
+import AdminRequest from '@/components/AdminRequest.vue';
 
 
 const routes = [
@@ -13,7 +19,13 @@ const routes = [
   { path: '/contact', component: ContactPage, name: 'Contact' },
   { path: '/login', component: Login, name: 'Login' },
   { path: '/employee-page', component: EmployeePage, name: 'Employee' },
-  { path: '/schedule', component: Schedule }
+  { path: '/schedule', component: Schedule, name: 'Schedule' },
+  { path: '/settings', component: Settings, name: 'Settings' },
+  {path: '/sales', component: Sales, name: 'Sales'},
+  {path: '/ingredients', component: Ingredients, name: 'Ingredients'},
+  {path: '/recipe', component: Recipe, name: 'Recipe'},
+  {path: '/profile', component: ProfileSettings, name: 'Profile'},
+  {path: '/admin-request', component: AdminRequest, name: 'AdminRequest'},
 ];
 
 const router = createRouter({

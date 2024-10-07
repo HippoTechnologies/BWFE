@@ -1,56 +1,5 @@
 <template>
-  <nav class="navbar">
-      <ul class="nav-links">
-        <!-- Left Side: Home and Welcome Message -->
-        <li class="left-section">
-          <router-link :to="{ name: 'Home' }" class="nav-link">
-            <img :src="logo" alt="Logo" class="logo" />
-          </router-link>
-          <small class="welcome-text">Hello, {{ employeeName }}</small>
-        </li>
-
-        <!-- Center Section: Schedule -->
-        <li class="center-section">
-          <router-link v-if="isEmployee" to="/schedule" class="nav-link">Schedule</router-link>
-        </li>
-
-        <!-- Right Side: Inventory, Search Bar, Cart, and Settings -->
-        <li class="right-section">
-          <div class="dropdown">
-            <button class="dropbtn">Inventory</button>
-            <div class="dropdown-content">
-              <router-link to="/ingredients">Ingredients</router-link>
-              <router-link to="/recipe">Recipe</router-link>
-              <router-link to="/sales">Sales</router-link>
-            </div>
-          </div>
-
-          <!-- Search Bar with Icon -->
-          <div class="search-section">
-            <input
-              type="text"
-              placeholder="Search..."
-              v-model="searchQuery"
-              class="search-input"
-            />
-            <button @click="handleSearch" class="search-button">
-              <i class="fas fa-search"></i> <!-- Search Icon -->
-            </button>
-          </div>
-
-          <router-link to="/cart" class="nav-link">
-            <i class="fas fa-shopping-cart"></i> Cart
-          </router-link>
-          <router-link to="/settings" class="nav-link">
-            <i class="fas fa-cog"></i> Settings
-          </router-link>
-        </li>
-      </ul>
-    </nav>
   <div class="ingredients-container">
-    <!-- Navbar -->
- 
-
     <div class="d-flex">
       <!-- Filter Section -->
       <div class="filter-section p-3">

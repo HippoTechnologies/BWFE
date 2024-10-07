@@ -1,49 +1,4 @@
 <template>
-  <nav class="navbar">
-    <ul class="nav-links">
-      <!-- Left Side: Home and Welcome Message -->
-      <li class="left-section">
-        <router-link :to="{ name: 'Home' }" class="nav-link">
-          <img :src="logo" alt="Logo" class="logo" />
-        </router-link>
-        <small class="welcome-text">Welcome, {{ userProfile.name }}</small>
-      </li>
-
-      <!-- Center Section: Schedule -->
-      <li class="center-section">
-        <!-- Add additional content here if needed -->
-      </li>
-
-      <!-- Inventory Dropdown -->
-      <li class="inventory-section">
-        <div class="dropdown">
-          <button class="dropbtn">Inventory</button>
-          <div class="dropdown-content">
-            <router-link to="/ingredients">Ingredients</router-link>
-            <router-link to="/recipe">Recipe</router-link>
-            <router-link to="/sales">Sales</router-link>
-          </div>
-        </div>
-      </li>
-
-      <!-- Right Side: Search Bar -->
-      <li class="right-section">
-        <!-- Search Bar with Icon -->
-        <div class="search-section">
-          <input
-            type="text"
-            placeholder="Search..."
-            v-model="searchQuery"
-            class="search-input"
-          />
-          <button @click="handleSearch" class="search-button">
-            <i class="fas fa-search"></i> <!-- Search Icon -->
-          </button>
-        </div>
-      </li>
-    </ul>
-  </nav>
-
   <div class="settings-page-container">
     <div class="settings-page">
       <h1>Settings</h1>
@@ -83,6 +38,7 @@
             <option v-for="ingredient in ingredients" :key="ingredient.id" :value="ingredient">{{ ingredient.name }}</option>
           </select>
           <button @click="removeIngredient" class="btn">Remove Ingredient</button>
+          <button class="btn btn-danger" @click="logout">Logout</button>
         </div>
       </section>
 
@@ -98,20 +54,29 @@
 <script>
 import { ref } from 'vue';
 import logo from '@/assets/logo.png'; // Ensure this path is correct
+import { state } from '../store/store';
+import { useRouter } from 'vue-router';
 
 export default {
   name: 'Settings',
   setup() {
+    const router = useRouter();
     const userProfile = ref({
       name: 'John Doe',
       email: 'johndoe@example.com',
     });
+    
     const isEmployee = ref(true); // Example employee check
     const searchQuery = ref('');
     const selectedRecipe = ref(null);
     const selectedIngredient = ref(null);
     const recipes = ref([]); // Initialize with your recipe data
     const ingredients = ref([]); // Initialize with your ingredient data
+
+    const logout = () => {
+      state.isEmployee = false;
+      router.push({ name: 'Home' });
+    };
 
     const handleSearch = () => {
       console.log('Searching for:', searchQuery.value);
@@ -160,6 +125,7 @@ export default {
       uploadIngredients,
       removeRecipe,
       removeIngredient,
+      logout
     };
   },
 };
@@ -174,21 +140,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #ffffff;
-  color: #000000;
-}
 
-.nav-links {
-  display: flex;
-  width: 100%;
-  list-style-type: none;
-  justify-content: space-between;
-}
 
 .left-section {
   display: flex;
@@ -211,66 +163,6 @@ export default {
 
 .inventory-section {
   position: relative;
-}
-
-.dropdown {
-  display: inline-block;
-}
-
-.dropbtn {
-  background-color: #7dc9ec; /* Button background */
-  color: white; /* Button text color */
-  padding: 10px; /* Button padding */
-  font-size: 16px; /* Button font size */
-  border: none; /* No border */
-  cursor: pointer; /* Pointer cursor on hover */
-}
-
-.dropdown-content {
-  display: none; /* Hide the dropdown content by default */
-  position: absolute; /* Position relative to the dropdown */
-  background-color: white; /* Dropdown background */
-  min-width: 160px; /* Minimum width of the dropdown */
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Dropdown shadow */
-  z-index: 1; /* Ensure dropdown is above other elements */
-}
-
-.dropdown:hover .dropdown-content {
-  display: block; /* Show dropdown on hover */
-}
-
-.dropdown-content a {
-  color: black; /* Link color */
-  padding: 12px 16px; /* Link padding */
-  text-decoration: none; /* Remove underline */
-  display: block; /* Block display */
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1; /* Background on hover */
-}
-
-/* Search Section */
-.search-section {
-  display: flex;
-  align-items: center;
-}
-
-.search-input {
-  padding: 5px;
-  border-radius: 4px;
-}
-
-.search-button {
-  padding: 6px 10px;
-  background-color: #ebf5f8;
-  border-radius: 4px;
-  color: #000;
-  margin-left: 5px;
-}
-
-.search-button:hover {
-  background-color: #008ae6;
 }
 
 /* Settings section with white background */
