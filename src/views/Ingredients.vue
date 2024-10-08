@@ -21,14 +21,24 @@
 
       <!-- Ingredients Table Section -->
       <div class="ingredients-table flex-grow-1">
-        <h2>Ingredients</h2>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6">
+              <h2>Ingredients</h2>
+            </div>
+            <div class="col-xs-6">
+              <button type="button" class="btn btn-primary">Add Ingredient</button>
+            </div>
+        </div>
+        </div>
+
         <table>
           <thead>
             <tr>
               <th>Name</th>
               <th>Quantity</th>
               <th>PurchaseQuantity</th>
-              <th>CostPerPurchaseQuantity</th>
+              <th>costPerPurchaseUnit</th>
               <th>Unit</th>
               <th>Notes</th>
             </tr>
@@ -38,7 +48,7 @@
               <td>{{ ingredient.name }}</td>
               <td>{{ ingredient.quantity }}</td>
               <td>{{ ingredient.purchaseQuantity }}</td>
-              <td>{{ ingredient.costPerPurchaseQuantity }}</td>
+              <td>{{ ingredient.costPerPurchaseUnit }}</td>
               <td>{{ ingredient.unit }}</td>
               <td>{{ ingredient.notes }}</td>
             </tr>
@@ -92,6 +102,7 @@ export default {
         "unit": "Egg(s)",
         "notes": "Ostrich Eggs used for Baking!"
         */
+        console.log(response.data)
         this.$emit('close');
       } catch (error) {
         console.error('Error retrieving ingredients:', error);
@@ -107,6 +118,9 @@ export default {
       } finally {
         this.loading = false; // Set loading to false
       }
+    },
+    async addRecipe() {
+      this.loading = true;
     },
     filterIngredients() {
       const query = this.searchQuery.toLowerCase();
