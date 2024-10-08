@@ -75,7 +75,7 @@ export default {
     async getIngredients() {
       this.loading = true;
       try {
-        const response = await axios.get('https://localhost:7195/api/inventory', {
+        const response = await axios.get('https://bakery.permavite.com/api/inventory', {
           headers: {
             'Authorization': `${this.apiKey}`
           },
