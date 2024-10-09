@@ -21,16 +21,16 @@
 
       <!-- Ingredients Table Section -->
       <div class="ingredients-table flex-grow-1">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-6">
+        <b-container>
+          <b-row class="d-flex justify-content-between align-items-center my-2">
+            <b-col cols="auto">
               <h2>Ingredients</h2>
-            </div>
-            <div class="col-xs-6">
+            </b-col>
+            <b-col cols="auto">
               <button type="button" class="btn btn-primary">Add Ingredient</button>
-            </div>
-        </div>
-        </div>
+            </b-col>
+          </b-row>
+        </b-container>
 
         <table>
           <thead>
