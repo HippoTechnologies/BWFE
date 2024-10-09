@@ -12,8 +12,8 @@
           <input type="text" class="form-control" id="lastName" v-model="lastName" required>
         </div>
         <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" v-model="email" required>
+          <label for="Username" class="form-label">Username</label>
+          <input type="Username" class="form-control" id="username" v-model="username" required>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   name: 'RegistrationForm',
@@ -40,25 +41,28 @@ export default {
     return {
       firstName: '',
       lastName: '',
-      email: '',
-      password: ''
+      username: '',
+      password: '',
+      passsalt: ''
     };
   },
   methods: {
-    /*async register() {
+    async register() {
       try {
         const response = await axios.post('https://bakery.permavite.com/api/register/user', {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          email: this.email,
-          password: this.password
+          FirstName: this.firstName,
+          LastName: this.lastName,
+          Username: this.username,
+          Password: this.password,
+          PassSalt: this.passsalt
+
         });
         console.log('User registered:', response.data);
         this.$emit('close');
       } catch (error) {
         console.error('Error registering user:', error);
       }
-    }*/
+    }
   }
 };
 </script>
