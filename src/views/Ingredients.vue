@@ -141,6 +141,7 @@ export default {
     closeIngredientForm() {
       const closeButton = document.getElementById('closeIngredientForm');
       closeButton.click();
+      this.getIngredients();
       
       //const modalElement = document.getElementById('ingredientForm');
       //const modal = Modal.getInstance(modalElement);    

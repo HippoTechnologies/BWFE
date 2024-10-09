@@ -38,7 +38,7 @@
                 <label for="notes" class="form-label">Notes</label>
                 <input type="text" class="form-control" id="notes" v-model="notes" required>
               </div>
-              <button type="submit" class="btn btn-primary w-100">Submit</button>
+              <button id="submitIngredient" type="submit" class="btn btn-primary w-100" data-bs-dismiss="">Submit</button>
             </form>
           </div>
           
@@ -90,15 +90,24 @@ export default {
         unit: this.unit,
         notes: this.notes
       }
+
+      const headers = {
+          'Content-Type': 'application/json', // Specify content type
+          'Authorization': `${this.apiKey}`, // Add an authorization token
+      };
       console.log(input);
 
       try {
-        const response = await axios.post('https://bakery.permavite.com/api/inventory', 
-        { headers: {
-          'Authorization': `${this.apiKey}`,
-          },
-          input
-        });
+        /* 
+          Id = Guid.NewGuid().ToString(),
+          Name = init.Name,
+          Quantity = init.Quantity,
+          PurchaseQuantity = init.PurchaseQuantity,
+          CostPerPurchaseUnit = init.CostPerPurchaseUnit,
+          Unit = init.Unit,
+          Notes = init.Notes
+        */
+        const response = await axios.post('https://bakery.permavite.com/api/inventory', input, { headers });
 
 
         this.$emit('close-modal');
