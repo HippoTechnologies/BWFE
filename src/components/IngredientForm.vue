@@ -119,7 +119,7 @@ export default {
         this.notes = '';
         Swal.fire({
           title: "Ingredient added!",
-          text: response.data,
+          text: "",
           icon: "success"
         });
       } catch (e) {
