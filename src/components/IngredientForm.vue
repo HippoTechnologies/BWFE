@@ -43,7 +43,7 @@
           </div>
           
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="closeIngredientForm" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
 
         </div>
@@ -55,6 +55,9 @@
 </template>
 
 <script>
+  import axios from 'axios';
+  import Swal from 'sweetalert2';
+
 export default {
   name: 'IngredientForm',
   props: {
@@ -89,7 +92,30 @@ export default {
       }
       console.log(input);
 
-      this.$emit('close-modal');
+      try {
+        const response = await axios.post('https://bakery.permavite.com/api/inventory', 
+        { headers: {
+          'Authorization': `${this.apiKey}`,
+          },
+          input
+        });
+
+
+        this.$emit('close-modal');
+        this.name = '';
+        this.quantity = 0;
+        this.purchaseQuantity = 0;
+        this.costPerPurchaseUnit = 0;
+        this.unit = '';
+        this.notes = '';
+        Swal.fire({
+          title: "Ingredient added!",
+          text: response.data,
+          icon: "success"
+        });
+      } catch (e) {
+
+      };
     }
   }
 };

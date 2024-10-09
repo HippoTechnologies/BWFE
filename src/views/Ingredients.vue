@@ -36,7 +36,7 @@
           </b-row>
         </b-container>
         
-        <IngredientForm @close-modal="closeModal"/>
+        <IngredientForm @close-modal="closeIngredientForm"/>
 
         <table>
           <thead>
@@ -133,17 +133,18 @@ export default {
     filterIngredients() {
       const query = this.searchQuery.toLowerCase();
       this.filteredIngredients = this.ingredients.filter(ingredient => {
-        const matchesCategory = this.selectedCategory ? ingredient.category === this.selectedCategory : true;
+        const matchesCategory = this.selectedCategory ? ingredient.notes.includes(this.selectedCategory): true;
         const matchesQuery = ingredient.name.toLowerCase().includes(query);
         return matchesCategory && matchesQuery;
       });
     },
-    closeModal() {
-      const modalElement = document.getElementById('ingredientForm');
-      const modal = Modal.getInstance(modalElement);    
-      modal.hide();
-      Modal.setAttribute("data-bs-backdrop", "false");
-      modal.dispose();
+    closeIngredientForm() {
+      const closeButton = document.getElementById('closeIngredientForm');
+      closeButton.click();
+      
+      //const modalElement = document.getElementById('ingredientForm');
+      //const modal = Modal.getInstance(modalElement);    
+      //modal.toggle();
       // You may want to also refresh the ingredients list here if necessary
     },
   },
