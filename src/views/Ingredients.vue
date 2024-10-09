@@ -18,7 +18,9 @@
           <button @click="filterIngredients" class="btn btn-primary mt-2 w-100">Filter</button>
         </div>
       </div>
+<div>
 
+</div>
       <!-- Ingredients Table Section -->
       <div class="ingredients-table flex-grow-1">
         <b-container>
@@ -27,10 +29,14 @@
               <h2>Ingredients</h2>
             </b-col>
             <b-col cols="auto">
-              <button type="button" class="btn btn-primary">Add Ingredient</button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingredientForm">
+                Add Ingredient
+              </button>
             </b-col>
           </b-row>
         </b-container>
+        
+        <IngredientForm @close-modal="closeModal"/>
 
         <table>
           <thead>
@@ -63,9 +69,14 @@
 import { ref } from 'vue';
 import logo from '@/assets/logo.png'; // Adjust the path based on your project structure
 import axios from 'axios'; // Make sure to import axios
+import { Modal } from 'bootstrap'
+import IngredientForm from './../components/IngredientForm.vue';
 
 export default {
   name: 'Ingredients',
+  components: {
+    IngredientForm,
+  },
   data() {
     return {
       searchQuery: '',
@@ -119,9 +130,6 @@ export default {
         this.loading = false; // Set loading to false
       }
     },
-    async addRecipe() {
-      this.loading = true;
-    },
     filterIngredients() {
       const query = this.searchQuery.toLowerCase();
       this.filteredIngredients = this.ingredients.filter(ingredient => {
@@ -129,6 +137,14 @@ export default {
         const matchesQuery = ingredient.name.toLowerCase().includes(query);
         return matchesCategory && matchesQuery;
       });
+    },
+    closeModal() {
+      const modalElement = document.getElementById('ingredientForm');
+      const modal = Modal.getInstance(modalElement);    
+      modal.hide();
+      Modal.setAttribute("data-bs-backdrop", "false");
+      modal.dispose();
+      // You may want to also refresh the ingredients list here if necessary
     },
   },
   mounted() {
