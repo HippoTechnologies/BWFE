@@ -3,7 +3,7 @@
   <div>
 
     <!-- Modal -->
-    <div class="modal fade" id="ingredientForm" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal fade" id="editIngredientForm" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
 
@@ -13,7 +13,7 @@
           </div>
 
           <div class="modal-body">
-            <form @submit.prevent="addIngredient">
+            <form @submit.prevent="editIngredient">
               <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" v-model="name" required>
@@ -38,12 +38,12 @@
                 <label for="notes" class="form-label">Notes</label>
                 <input type="text" class="form-control" id="notes" v-model="notes" required>
               </div>
-              <button id="submitIngredient" type="submit" class="btn btn-primary w-100" data-bs-dismiss="">Submit</button>
+              <button id="submitIngredient" type="submit" class="btn btn-primary w-100" data-bs-dismiss="">Edit</button>
             </form>
           </div>
           
           <div class="modal-footer">
-            <button id="closeIngredientForm" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="closeEditIngredientForm" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
 
         </div>
@@ -59,7 +59,7 @@
   import Swal from 'sweetalert2';
 
 export default {
-  name: 'IngredientForm',
+  name: 'EditIngredientForm',
   props: {
     title: {
       type: String,
@@ -72,6 +72,8 @@ export default {
   },
   data() {
     return {
+      selectedIngredient: null,
+      id: '',
       name: '',
       quantity: 0,
       purchaseQuantity: 0,
@@ -81,8 +83,9 @@ export default {
     };
   },
   methods: {
-    async addIngredient() {
+    async editIngredient() {
       var input = {
+        id: this.id,
         name: this.name,
         quantity: this.quantity,
         purchaseQuantity: this.purchaseQuantity,

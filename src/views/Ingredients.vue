@@ -29,14 +29,14 @@
               <h2>Ingredients</h2>
             </b-col>
             <b-col cols="auto">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingredientForm">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addIngredientForm">
                 Add Ingredient
               </button>
             </b-col>
           </b-row>
         </b-container>
         
-        <IngredientForm @close-modal="closeIngredientForm"/>
+        <AddIngredientForm @close-modal="closeAddIngredientForm"/>
 
         <table>
           <thead>
@@ -47,6 +47,7 @@
               <th>costPerPurchaseUnit</th>
               <th>Unit</th>
               <th>Notes</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -57,9 +58,16 @@
               <td>{{ ingredient.costPerPurchaseUnit }}</td>
               <td>{{ ingredient.unit }}</td>
               <td>{{ ingredient.notes }}</td>
+              <td>
+                <div class="d-flex">
+                  <button class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editIngredientForm">Edit</button>
+                  <button @click="deleteIngredient(ingredient.id)" class="btn btn-danger btn-sm">Delete</button>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
+        <EditIngredientForm @close-modal="closeEditIngredientForm"/>
       </div>
     </div>
   </div>
@@ -70,12 +78,14 @@ import { ref } from 'vue';
 import logo from '@/assets/logo.png'; // Adjust the path based on your project structure
 import axios from 'axios'; // Make sure to import axios
 import { Modal } from 'bootstrap'
-import IngredientForm from './../components/IngredientForm.vue';
+import AddIngredientForm from './../components/AddIngredientForm.vue';
+import EditIngredientForm from './../components/EditIngredientForm.vue';
 
 export default {
   name: 'Ingredients',
   components: {
-    IngredientForm,
+    AddIngredientForm,
+    EditIngredientForm,
   },
   data() {
     return {
@@ -95,6 +105,15 @@ export default {
     
     async getIngredients() {
       this.loading = true;
+        this.ingredients = [
+        { id: 1, name: 'Flour', quantity: '5', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
+        { id: 2, name: 'Sugar', quantity: '4', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
+        { id: 3, name: 'Eggs', quantity: '12', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
+        { id: 4, name: 'Chocolate', quantity: '500', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
+        { id: 5, name: 'Butter', quantity: '500', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
+        { id: 6, name: 'Milk', quantity: '1000', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
+        { id: 7, name: 'Oil', quantity: '300', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
+      ];
       try {
         const response = await axios.get('https://bakery.permavite.com/api/inventory', {
           headers: {
@@ -130,6 +149,21 @@ export default {
         this.loading = false; // Set loading to false
       }
     },
+    async deleteIngredient(id) {
+      try {
+        const response = await axios.delete('https://bakery.permavite.com/api/inventory/'+ id, {
+          headers: {
+            'Authorization': `${this.apiKey}`
+          },
+        });
+        console.log(response);
+        this.$emit('close');
+      } catch (error) {
+        console.error('Error deleting item:', error);
+      } finally {
+        this.loading = false; // Set loading to false
+      }
+    },
     filterIngredients() {
       const query = this.searchQuery.toLowerCase();
       this.filteredIngredients = this.ingredients.filter(ingredient => {
@@ -138,8 +172,8 @@ export default {
         return matchesCategory && matchesQuery;
       });
     },
-    closeIngredientForm() {
-      const closeButton = document.getElementById('closeIngredientForm');
+    closeAddIngredientForm() {
+      const closeButton = document.getElementById('closeAddIngredientForm');
       closeButton.click();
       this.getIngredients();
       
