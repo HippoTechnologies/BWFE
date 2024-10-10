@@ -161,7 +161,8 @@ export default {
       try {
         const response = await axios.delete('https://bakery.permavite.com/api/inventory/'+ id, {
           headers: {
-            'Authorization': `${this.apiKey}`
+            'Authorization': `${this.apiKey}`,
+            scheme: 'https',
           },
         });
         console.log(response);
