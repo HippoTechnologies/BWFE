@@ -60,14 +60,14 @@
               <td>{{ ingredient.notes }}</td>
               <td>
                 <div class="d-flex">
-                  <button class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editIngredientForm">Edit</button>
+                  <button @click="selectIngredient(ingredient)" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editIngredientForm" :id="ingredient.id + 'editButton'">Edit</button>
                   <button @click="deleteIngredient(ingredient.id)" class="btn btn-danger btn-sm">Delete</button>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
-        <EditIngredientForm @close-modal="closeEditIngredientForm"/>
+        <EditIngredientForm :ingredient="selectedIngredient" v-if="selectedIngredient" :title="'ID: '" @close-modal="closeEditIngredientForm"/>
       </div>
     </div>
   </div>
@@ -96,13 +96,13 @@ export default {
       loading: true,
       error: null,
       logo: logo,
+      selectedIngredient: null,
     };
   },
   created() {
     this.getIngredients();
   },
   methods: {
-    
     async getIngredients() {
       this.loading = true;
         this.ingredients = [
@@ -182,6 +182,12 @@ export default {
       //modal.toggle();
       // You may want to also refresh the ingredients list here if necessary
     },
+    selectIngredient(ingredient) {
+      this.selectedIngredient = ingredient;
+    },
+    closeEditIngredientForm() {
+
+    }
   },
   mounted() {
     this.filteredIngredients = this.ingredients;
@@ -191,6 +197,8 @@ export default {
     link.rel = 'stylesheet';
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
     document.head.appendChild(link);
+
+    
   },
 };
 </script>

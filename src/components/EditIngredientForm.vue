@@ -8,7 +8,7 @@
         <div class="modal-content">
 
           <div class="modal-header">
-            <h5 class="modal-title" id="modalLabel">{{ title }}</h5>
+            <h5 class="modal-title" id="modalLabelTitle">{{ title }} {{ id }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
@@ -63,16 +63,27 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Ingredient'
+      default: 'Ingredient',
     },
     bodyText: {
       type: String,
-      default: 'This shouldnt show'
+      default: 'This shouldnt show',
+    },
+    ingredient: {
+      type: Object,
+      default: () => ({
+          id: '0',
+          name: 'NULL',
+          quantity: 0,
+          purchaseQuantity: 0,
+          costPerPurchaseUnit: 0,
+          unit: 'NULL',
+          notes: 'NULL'
+        }),
     }
   },
   data() {
     return {
-      selectedIngredient: null,
       id: '',
       name: '',
       quantity: 0,
@@ -82,7 +93,27 @@ export default {
       notes: ''
     };
   },
+  created() {
+    this.populateForm();
+  },
+  watch: {
+    ingredient: {
+      immediate: true,
+      handler() {
+        this.populateForm();
+      }
+    }
+  },
   methods: {
+    populateForm() {
+      this.id = this.ingredient.id;
+      this.name = this.ingredient.name;
+      this.quantity = this.ingredient.quantity;
+      this.purchaseQuantity = this.ingredient.purchaseQuantity;
+      this.costPerPurchaseUnit = this.ingredient.costPerPurchaseUnit;
+      this.unit = this.ingredient.unit;
+      this.notes = this.ingredient.notes;
+    },
     async editIngredient() {
       var input = {
         id: this.id,
