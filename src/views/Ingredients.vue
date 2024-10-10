@@ -96,7 +96,15 @@ export default {
       loading: true,
       error: null,
       logo: logo,
-      selectedIngredient: null,
+      selectedIngredient: {
+          id: '0',
+          name: 'NULL',
+          quantity: 0,
+          purchaseQuantity: 0,
+          costPerPurchaseUnit: 0,
+          unit: 'NULL',
+          notes: 'NULL'
+        },
     };
   },
   created() {
