@@ -78,6 +78,7 @@ import { ref } from 'vue';
 import logo from '@/assets/logo.png'; // Adjust the path based on your project structure
 import axios from 'axios'; // Make sure to import axios
 import { Modal } from 'bootstrap'
+import Swal from 'sweetalert2';
 import AddIngredientForm from './../components/AddIngredientForm.vue';
 import EditIngredientForm from './../components/EditIngredientForm.vue';
 
@@ -158,9 +159,18 @@ export default {
         });
         this.getIngredients();
         console.log(response);
-        this.$emit('close');
-      } catch (error) {
-        console.error('Error deleting item:', error);
+        Swal.fire({
+          title: "Deleted!",
+          text: "",
+          icon: "success"
+        });
+      } catch (e) {
+        console.error('Error deleting item:', e);
+        Swal.fire({
+          title: "Error!",
+          text: e,
+          icon: "error"
+        });
       } finally {
         this.loading = false; // Set loading to false
       }
