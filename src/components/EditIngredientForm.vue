@@ -20,15 +20,15 @@
               </div>
               <div class="mb-3">
                 <label for="quantity" class="form-label">Quantity</label>
-                <input type="number" class="form-control" id="quantity" v-model="quantity" required>
+                <input type="number" step="0.01" class="form-control" id="quantity" v-model="quantity" required>
               </div>
               <div class="mb-3">
                 <label for="purchaseQuantity" class="form-label">Purchase Quantity</label>
-                <input type="number" class="form-control" id="purchaseQuantity" v-model="purchaseQuantity" required>
+                <input type="number" step="0.01" class="form-control" id="purchaseQuantity" v-model="purchaseQuantity" required>
               </div>
               <div class="mb-3">
                 <label for="costPerPurchaseUnit" class="form-label">Cost Per Purchase Unit</label>
-                <input type="number" class="form-control" id="costPerPurchaseUnit" v-model="costPerPurchaseUnit" required>
+                <input type="number" step="0.01" class="form-control" id="costPerPurchaseUnit" v-model="costPerPurchaseUnit" required>
               </div>
               <div class="mb-3">
                 <label for="unit" class="form-label">Unit</label>
@@ -141,7 +141,7 @@ export default {
           Unit = init.Unit,
           Notes = init.Notes
         */
-        const response = await axios.post('https://bakery.permavite.com/api/inventory', input, { headers });
+        const response = await axios.put('https://bakery.permavite.com/api/inventory/', input, { headers });
 
 
         this.$emit('close-modal');
@@ -152,12 +152,16 @@ export default {
         this.unit = '';
         this.notes = '';
         Swal.fire({
-          title: "Ingredient added!",
+          title: "Ingredient Changed!",
           text: "",
           icon: "success"
         });
       } catch (e) {
-
+        Swal.fire({
+          title: "Error!",
+          text: e,
+          icon: "error"
+        });
       };
     }
   }

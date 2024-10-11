@@ -159,12 +159,13 @@ export default {
     },
     async deleteIngredient(id) {
       try {
-        const response = await axios.delete('https://bakery.permavite.com/api/inventory/'+ id, {
+        const response = await axios.delete('https://bakery.permavite.com/api/inventory/id/'+ id, {
           headers: {
             'Authorization': `${this.apiKey}`,
             scheme: 'https',
           },
         });
+        this.getIngredients();
         console.log(response);
         this.$emit('close');
       } catch (error) {
@@ -195,7 +196,14 @@ export default {
       this.selectedIngredient = ingredient;
     },
     closeEditIngredientForm() {
-
+      const closeButton = document.getElementById('closeEditIngredientForm');
+      closeButton.click();
+      this.getIngredients();
+      
+      //const modalElement = document.getElementById('ingredientForm');
+      //const modal = Modal.getInstance(modalElement);    
+      //modal.toggle();
+      // You may want to also refresh the ingredients list here if necessary
     }
   },
   mounted() {
