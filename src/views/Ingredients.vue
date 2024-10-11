@@ -113,15 +113,6 @@ export default {
   methods: {
     async getIngredients() {
       this.loading = true;
-        this.ingredients = [
-        { id: 1, name: 'Flour', quantity: '5', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
-        { id: 2, name: 'Sugar', quantity: '4', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
-        { id: 3, name: 'Eggs', quantity: '12', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
-        { id: 4, name: 'Chocolate', quantity: '500', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
-        { id: 5, name: 'Butter', quantity: '500', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
-        { id: 6, name: 'Milk', quantity: '1000', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
-        { id: 7, name: 'Oil', quantity: '300', purchaseQuantity: '15.00', costPerPurchaseUnit: '30.00', unit: 'kg', notes: 'notes'},
-      ];
       try {
         const response = await axios.get('https://bakery.permavite.com/api/inventory', {
           headers: {
