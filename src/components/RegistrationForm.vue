@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { state } from '@/store/store';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -71,19 +72,14 @@ export default {
           // Redirect to the employee dashboard or update the Navbar
           this.$router.push({ name: 'Employee' });
         }
-      } catch (error) {
+      } catch (e) {
         // Handle errors such as incorrect credentials
-        if (response.status != 201) {
+        if (state.isEmployee != true) {
           Swal.fire({
             title: "Failure!",
             text: "",
             icon: "error"
           });
-          if (error.response && error.response.data.message) {
-            this.errorMessage = error.response.data.message;
-          } else {
-            this.errorMessage = "An error occurred. Please try again.";
-          }
         }
       }
     }
