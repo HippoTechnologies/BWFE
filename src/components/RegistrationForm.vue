@@ -58,7 +58,6 @@ export default {
 
         });
         console.log('User registered:', response.data);
-        this.$emit('close');
         console.log(response);
         // Handle successful login
         if (response.status === 201) {
