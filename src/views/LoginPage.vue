@@ -65,9 +65,9 @@ export default {
         username: this.username,
         password: this.password,
       });
-      console.log(response.data);
+      console.log(response);
       // Handle successful login
-      if (response.status === 200) {
+      if (response.status === 201) {
         // Assuming the response contains user data or token
         state.isEmployee = true;
         // Save the token or user data to sessionStorage
