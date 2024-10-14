@@ -65,7 +65,7 @@ export default {
         username: this.username,
         password: this.password,
       });
-
+      console.log(response.data);
       // Handle successful login
       if (response.status === 200) {
         // Assuming the response contains user data or token
