@@ -59,8 +59,24 @@ export default {
         });
         console.log('User registered:', response.data);
         this.$emit('close');
+        console.log(response);
+        // Handle successful login
+        if (response.status === 201) {
+          // Assuming the response contains user data or token
+          state.isEmployee = true;
+          // Save the token or user data to sessionStorage
+          sessionStorage.setItem('SessionId', response.data.id);
+          
+          // Redirect to the employee dashboard or update the Navbar
+          this.$router.push({ name: 'Employee' });
+        }
       } catch (error) {
-        console.error('Error registering user:', error);
+        // Handle errors such as incorrect credentials
+        if (error.response && error.response.data.message) {
+          this.errorMessage = error.response.data.message;
+        } else {
+          this.errorMessage = "An error occurred. Please try again.";
+        }
       }
     }
   }
