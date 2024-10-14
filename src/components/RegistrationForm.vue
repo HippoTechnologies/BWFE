@@ -73,13 +73,13 @@ export default {
         }
       } catch (error) {
         // Handle errors such as incorrect credentials
+        Swal.fire({
+          title: "Failure!",
+          text: "",
+          icon: "error"
+        });
         if (error.response && error.response.data.message) {
           this.errorMessage = error.response.data.message;
-          Swal.fire({
-            title: "Failure!",
-            text: "",
-            icon: "error"
-          });
         } else {
           this.errorMessage = "An error occurred. Please try again.";
         }

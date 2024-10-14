@@ -44,6 +44,7 @@
 import RegistrationForm from '@/components/RegistrationForm.vue';
 import { state } from '../store/store';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'Login',
@@ -85,7 +86,7 @@ export default {
       }
     }
   },
-  async handleRegisterSuccess() { //not sure if this has to be async
+  handleRegisterSuccess() { //not sure if this has to be async
       // Redirect to the Employee dashboard after successful registration
       this.$router.push({ name: 'Employee' });
       Swal.fire({
