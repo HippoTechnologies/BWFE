@@ -14,13 +14,13 @@ import AdminRequest from '@/components/AdminRequest.vue';
 
 
 const routes = [
-  { path: '/', component: HomePage, name: 'Home' },
-  { path: '/products', component: ProductsPage, name: 'Products' },
-  { path: '/contact', component: ContactPage, name: 'Contact' },
-  { path: '/login', component: Login, name: 'Login' },
-  { path: '/employee-page', component: EmployeePage, name: 'Employee' },
-  { path: '/schedule', component: Schedule, name: 'Schedule' },
-  { path: '/settings', component: Settings, name: 'Settings' },
+  {path: '/', component: HomePage, name: 'Home' },
+  {path: '/products', component: ProductsPage, name: 'Products' },
+  {path: '/contact', component: ContactPage, name: 'Contact' },
+  {path: '/login', component: Login, name: 'Login' },
+  {path: '/employee-page', component: EmployeePage, name: 'Employee' },
+  {path: '/schedule', component: Schedule, name: 'Schedule' },
+  {path: '/settings', component: Settings, name: 'Settings' },
   {path: '/sales', component: Sales, name: 'Sales'},
   {path: '/ingredients', component: Ingredients, name: 'Ingredients'},
   {path: '/recipe', component: Recipe, name: 'Recipe'},
