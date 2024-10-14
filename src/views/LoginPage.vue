@@ -76,9 +76,19 @@ export default {
         
         // Redirect to the employee dashboard or update the Navbar
         this.$router.push({ name: 'Employee' });
+        Swal.fire({
+          title: "Success!",
+          text: "",
+          icon: "success"
+        });
       }
-    } catch (error) {
+    } catch (e) {
       // Handle errors such as incorrect credentials
+      Swal.fire({
+        title: "Success!",
+        text: "",
+        icon: "success"
+      });
       if (error.response && error.response.data.message) {
         this.errorMessage = error.response.data.message;
       } else {
