@@ -71,7 +71,7 @@ export default {
         // Assuming the response contains user data or token
         state.isEmployee = true;
         // Save the token or user data to sessionStorage
-        sessionStorage.setItem('token', response.data.token);
+        sessionStorage.setItem('SessionId', response.data.id);
         
         // Redirect to the employee dashboard or update the Navbar
         this.$router.push({ name: 'Employee' });
