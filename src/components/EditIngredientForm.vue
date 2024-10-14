@@ -127,7 +127,7 @@ export default {
 
       const headers = {
           'Content-Type': 'application/json', // Specify content type
-          'Authorization': `${this.apiKey}`, // Add an authorization token
+          'Authorization': `${sessionStorage.getItem('SessionId')}`, // Add an authorization token
       };
       console.log(input);
 
