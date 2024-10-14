@@ -12,11 +12,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all.js';
 
 
-import key from './key.txt?raw'
-
 const app = createApp(App);
-
-app.config.globalProperties.apiKey = key;
 
 app.use(router);
 app.use(BootstrapVue3);
