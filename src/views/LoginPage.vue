@@ -88,7 +88,13 @@ export default {
   async handleRegisterSuccess() { //not sure if this has to be async
       // Redirect to the Employee dashboard after successful registration
       this.$router.push({ name: 'Employee' });
+      Swal.fire({
+        title: "Success!",
+        text: "",
+        icon: "success"
+      });
     }
+    
 }
 
 };
