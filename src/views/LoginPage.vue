@@ -85,9 +85,9 @@ export default {
     } catch (e) {
       // Handle errors such as incorrect credentials
       Swal.fire({
-        title: "Success!",
+        title: "Failure!",
         text: "",
-        icon: "success"
+        icon: "error"
       });
       if (error.response && error.response.data.message) {
         this.errorMessage = error.response.data.message;
