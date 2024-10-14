@@ -61,6 +61,7 @@ export default {
         console.log(response);
         // Handle successful login
         if (response.status === 201) {
+          this.$emit('register-success');
           // Assuming the response contains user data or token
           state.isEmployee = true;
           // Save the token or user data to sessionStorage

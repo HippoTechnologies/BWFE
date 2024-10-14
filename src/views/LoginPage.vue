@@ -35,7 +35,7 @@
           </div>
         </div>
       </transition>
-      <RegistrationForm :show="showRegistrationForm" @close="showRegistrationForm = false" />
+      <RegistrationForm :show="showRegistrationForm" @close="showRegistrationForm = false" @register-success="handleRegisterSuccess" />
     </main>
   </div>
 </template>
@@ -84,7 +84,11 @@ export default {
         this.errorMessage = "An error occurred. Please try again.";
       }
     }
-  }
+  },
+  async handleRegisterSuccess() { //not sure if this has to be async
+      // Redirect to the Employee dashboard after successful registration
+      this.$router.push({ name: 'Employee' });
+    }
 }
 
 };
