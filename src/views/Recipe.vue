@@ -77,6 +77,7 @@
 <script>
 import { ref } from 'vue';
 import logo from '@/assets/logo.png';
+import axios from 'axios';
 
 export default {
   name: 'Recipe',
@@ -98,7 +99,55 @@ export default {
 
     return { logo: logoUrl };
   },
+  created() {
+    this.getRecipes();
+  },
   methods: {
+    async getRecipes() {
+      this.loading = true;
+      try {
+        const response = await axios.get('https://bakery.permavite.com/api/recipes', {
+          headers: {
+            'Authorization': `${this.apiKey}`
+          },
+        });
+        console.log(response);
+        this.recipes = response.data;
+        this.filteredRecipes = this.recipes;
+        console.log(response.data)
+        this.$emit('close');
+      } catch (error) {
+        console.error('Error retrieving ingredients:', error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    async deleteRecipe(id) {
+      try {
+        const response = await axios.delete('https://bakery.permavite.com/api/recipes/id/'+ id, {
+          headers: {
+            'Authorization': `${this.apiKey}`,
+            scheme: 'https',
+          },
+        });
+        this.getRecipes();
+        console.log(response);
+        Swal.fire({
+          title: "Deleted!",
+          text: "",
+          icon: "success"
+        });
+      } catch (e) {
+        console.error('Error deleting recipe:', e);
+        Swal.fire({
+          title: "Error!",
+          text: e,
+          icon: "error"
+        });
+      } finally {
+        this.loading = false;
+      }
+    },
     filterRecipes() {
       const query = this.searchQuery.toLowerCase();
       this.filteredRecipes = this.recipes.filter(recipe => {
