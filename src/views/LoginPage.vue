@@ -14,7 +14,7 @@
             <div class="d-flex justify-content-between mb-3">
               <a href="#" class="text-decoration-none">Forgot Password?</a>
             </div>
-            <button @click="login">Continue</button>
+            <button @click="loginUser">Continue</button>
           </form>
           <div class="footer mt-4 text-center">
             <span>Or Connect With Social Media</span>
@@ -43,6 +43,7 @@
 <script>
 import RegistrationForm from '@/components/RegistrationForm.vue';
 import { state } from '../store/store';
+import axios from 'axios';
 
 export default {
   name: 'Login',
@@ -53,15 +54,39 @@ export default {
     return {
       username: '',
       password: '',
+      errorMessage: null,
       showRegistrationForm: false
     };
   },
   methods: {
-    login() {
-      state.isEmployee = true;
-      this.$router.push({ name: 'Employee' });
+  async loginUser() {
+    try {
+      const response = await axios.post('https://bakery.permavite.com/api/login', {
+        username: this.username,
+        password: this.password,
+      });
+
+      // Handle successful login
+      if (response.status === 200) {
+        // Assuming the response contains user data or token
+        state.isEmployee = true;
+        // Save the token or user data to sessionStorage
+        sessionStorage.setItem('token', response.data.token);
+        
+        // Redirect to the employee dashboard or update the Navbar
+        this.$router.push({ name: 'Employee' });
+      }
+    } catch (error) {
+      // Handle errors such as incorrect credentials
+      if (error.response && error.response.data.message) {
+        this.errorMessage = error.response.data.message;
+      } else {
+        this.errorMessage = "An error occurred. Please try again.";
+      }
     }
   }
+}
+
 };
 </script>
 
