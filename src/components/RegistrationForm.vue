@@ -27,7 +27,9 @@
 </template>
 
 <script>
+import { state } from '@/store/store';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'RegistrationForm',
@@ -58,9 +60,27 @@ export default {
 
         });
         console.log('User registered:', response.data);
-        this.$emit('close');
-      } catch (error) {
-        console.error('Error registering user:', error);
+        console.log(response);
+        // Handle successful login
+        if (response.status === 201) {
+          this.$emit('register-success');
+          // Assuming the response contains user data or token
+          state.isEmployee = true;
+          // Save the token or user data to sessionStorage
+          sessionStorage.setItem('SessionId', response.data.id);
+          
+          // Redirect to the employee dashboard or update the Navbar
+          this.$router.push({ name: 'Employee' });
+        }
+      } catch (e) {
+        // Handle errors such as incorrect credentials
+        if (state.isEmployee != true) {
+          Swal.fire({
+            title: "Failure!",
+            text: "",
+            icon: "error"
+          });
+        }
       }
     }
   }

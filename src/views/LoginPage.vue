@@ -14,7 +14,7 @@
             <div class="d-flex justify-content-between mb-3">
               <a href="#" class="text-decoration-none">Forgot Password?</a>
             </div>
-            <button @click="login">Continue</button>
+            <button @click="loginUser">Continue</button>
           </form>
           <div class="footer mt-4 text-center">
             <span>Or Connect With Social Media</span>
@@ -35,7 +35,7 @@
           </div>
         </div>
       </transition>
-      <RegistrationForm :show="showRegistrationForm" @close="showRegistrationForm = false" />
+      <RegistrationForm :show="showRegistrationForm" @close="showRegistrationForm = false" @register-success="handleRegisterSuccess" />
     </main>
   </div>
 </template>
@@ -43,6 +43,8 @@
 <script>
 import RegistrationForm from '@/components/RegistrationForm.vue';
 import { state } from '../store/store';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'Login',
@@ -53,15 +55,59 @@ export default {
     return {
       username: '',
       password: '',
+      errorMessage: null,
       showRegistrationForm: false
     };
   },
   methods: {
-    login() {
-      state.isEmployee = true;
-      this.$router.push({ name: 'Employee' });
+  async loginUser() {
+    try {
+      const response = await axios.post('https://bakery.permavite.com/api/login', {
+        username: this.username,
+        password: this.password,
+      });
+      console.log(response);
+      // Handle successful login
+      if (response.status === 201) {
+        // Assuming the response contains user data or token
+        state.isEmployee = true;
+        // Save the token or user data to sessionStorage
+        sessionStorage.setItem('SessionId', response.data.id);
+        
+        // Redirect to the employee dashboard or update the Navbar
+        this.$router.push({ name: 'Employee' });
+        Swal.fire({
+          title: "Success!",
+          text: "",
+          icon: "success"
+        });
+      }
+    } catch (e) {
+      // Handle errors such as incorrect credentials
+      Swal.fire({
+        title: "Failure!",
+        text: "",
+        icon: "error"
+      });
+      if (error.response && error.response.data.message) {
+        this.errorMessage = error.response.data.message;
+      } else {
+        this.errorMessage = "An error occurred. Please try again.";
+      }
     }
-  }
+  },
+  handleRegisterSuccess() { //not sure if this has to be async
+      // Redirect to the Employee dashboard after successful registration
+      this.$router.push({ name: 'Employee' });
+      Swal.fire({
+        title: "Success!",
+        text: "",
+        icon: "success"
+      });
+    }
+    
+}
+
 };
 </script>
 
