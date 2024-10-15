@@ -18,23 +18,45 @@
           <button @click="filterIngredients" class="btn btn-primary mt-2 w-100">Filter</button>
         </div>
       </div>
+<div>
 
+</div>
       <!-- Ingredients Table Section -->
       <div class="ingredients-table flex-grow-1">
-        <h2>Ingredients</h2>
+        <b-container>
+          <b-row class="d-flex justify-content-between align-items-center my-2">
+            <b-col cols="auto">
+              <h2>Ingredients</h2>
+            </b-col>
+            <b-col cols="auto">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingredientForm">
+                Add Ingredient
+              </button>
+            </b-col>
+          </b-row>
+        </b-container>
+        
+        <IngredientForm @close-modal="closeIngredientForm"/>
+
         <table>
           <thead>
             <tr>
               <th>Name</th>
               <th>Quantity</th>
-              <th>Price</th>
+              <th>PurchaseQuantity</th>
+              <th>costPerPurchaseUnit</th>
+              <th>Unit</th>
+              <th>Notes</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="ingredient in filteredIngredients" :key="ingredient.id">
               <td>{{ ingredient.name }}</td>
               <td>{{ ingredient.quantity }}</td>
-              <td>{{ ingredient.price }}</td>
+              <td>{{ ingredient.purchaseQuantity }}</td>
+              <td>{{ ingredient.costPerPurchaseUnit }}</td>
+              <td>{{ ingredient.unit }}</td>
+              <td>{{ ingredient.notes }}</td>
             </tr>
           </tbody>
         </table>
@@ -46,34 +68,85 @@
 <script>
 import { ref } from 'vue';
 import logo from '@/assets/logo.png'; // Adjust the path based on your project structure
+import axios from 'axios'; // Make sure to import axios
+import { Modal } from 'bootstrap'
+import IngredientForm from '../components/AddIngredientForm.vue';
 
 export default {
   name: 'Ingredients',
+  components: {
+    IngredientForm,
+  },
   data() {
     return {
       searchQuery: '',
       selectedCategory: '',
-      ingredients: [
-        { id: 1, name: 'Flour', quantity: '5 kg', price: '$15.00', category: 'Baking' },
+      ingredients: [],
+      filteredIngredients: [],
+      loading: true,
+      error: null,
+      logo: logo,
+    };
+  },
+  created() {
+    this.getIngredients();
+  },
+  methods: {
+    
+    async getIngredients() {
+      this.loading = true;
+      try {
+        const response = await axios.get('https://bakery.permavite.com/api/inventory', {
+          headers: {
+            'Authorization': `${sessionStorage.getItem('SessionId')}`
+          },
+        });
+        console.log(response);
+        this.ingredients = response.data;
+        this.filteredIngredients = this.ingredients; // Initialize filtered ingredients
+        /*
+        "id": "12b57d0c-1ce6-4882-93b0-05b5ff50db1a",
+        "name": "Ostrich Eggs",
+        "quantity": 1000,
+        "purchaseQuantity": 59,
+        "costPerPurchaseUnit": 70.4,
+        "unit": "Egg(s)",
+        "notes": "Ostrich Eggs used for Baking!"
+        */
+        console.log(response.data)
+        this.$emit('close');
+      } catch (error) {
+        console.error('Error retrieving ingredients:', error);
+        this.ingredients = [
+        { id: 1, name: 'Flour', quantity: '5 kg', price: '$15.00'},
         { id: 2, name: 'Sugar', quantity: '4 kg', price: '$8.00', category: 'Baking' },
         { id: 3, name: 'Eggs', quantity: '12 pcs', price: '$3.00', category: 'Dairy' },
         { id: 4, name: 'Chocolate', quantity: '500 g', price: '$10.00', category: 'Baking' },
         { id: 5, name: 'Butter', quantity: '500 g', price: '$6.00', category: 'Dairy' },
         { id: 6, name: 'Milk', quantity: '1000 ml', price: '$2.50', category: 'Dairy' },
         { id: 7, name: 'Oil', quantity: '300 ml', price: '$1.20', category: 'Baking' },
-      ],
-      filteredIngredients: [],
-      logo: logo,
-    };
-  },
-  methods: {
+      ];
+      } finally {
+        this.loading = false; // Set loading to false
+      }
+    },
     filterIngredients() {
       const query = this.searchQuery.toLowerCase();
       this.filteredIngredients = this.ingredients.filter(ingredient => {
-        const matchesCategory = this.selectedCategory ? ingredient.category === this.selectedCategory : true;
+        const matchesCategory = this.selectedCategory ? ingredient.notes.includes(this.selectedCategory): true;
         const matchesQuery = ingredient.name.toLowerCase().includes(query);
         return matchesCategory && matchesQuery;
       });
+    },
+    closeIngredientForm() {
+      const closeButton = document.getElementById('closeIngredientForm');
+      closeButton.click();
+      this.getIngredients();
+      
+      //const modalElement = document.getElementById('ingredientForm');
+      //const modal = Modal.getInstance(modalElement);    
+      //modal.toggle();
+      // You may want to also refresh the ingredients list here if necessary
     },
   },
   mounted() {
