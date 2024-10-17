@@ -37,7 +37,6 @@
         </b-container>
         
         <AddIngredientForm @close-modal="closeAddIngredientForm"/>
-
         <table>
           <thead>
             <tr>
@@ -58,6 +57,7 @@
               <td>{{ ingredient.costPerPurchaseUnit }}</td>
               <td>{{ ingredient.unit }}</td>
               <td>{{ ingredient.notes }}</td>
+           
               <td>
                 <div class="d-flex">
                   <button @click="selectIngredient(ingredient)" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editIngredientForm" :id="ingredient.id + 'editButton'">Edit</button>
@@ -112,6 +112,7 @@ export default {
     this.getIngredients();
   },
   methods: {
+
     async getIngredients() {
       this.loading = true;
       try {
