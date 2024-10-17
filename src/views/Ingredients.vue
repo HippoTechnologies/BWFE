@@ -153,7 +153,7 @@ export default {
       try {
         const response = await axios.delete('https://bakery.permavite.com/api/inventory/id/'+ id, {
           headers: {
-            'Authorization': `${this.apiKey}`,
+            'Authorization': `${sessionStorage.getItem("SessionId")}`,
             scheme: 'https',
           },
         });
