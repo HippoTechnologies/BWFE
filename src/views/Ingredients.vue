@@ -29,14 +29,14 @@
               <h2>Ingredients</h2>
             </b-col>
             <b-col cols="auto">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addIngredientForm">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingredientForm">
                 Add Ingredient
               </button>
             </b-col>
           </b-row>
         </b-container>
         
-        <AddIngredientForm @close-modal="closeAddIngredientForm"/>
+        <IngredientForm @close-modal="closeIngredientForm"/>
 
         <table>
           <thead>
@@ -47,7 +47,6 @@
               <th>costPerPurchaseUnit</th>
               <th>Unit</th>
               <th>Notes</th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -58,16 +57,9 @@
               <td>{{ ingredient.costPerPurchaseUnit }}</td>
               <td>{{ ingredient.unit }}</td>
               <td>{{ ingredient.notes }}</td>
-              <td>
-                <div class="d-flex">
-                  <button @click="selectIngredient(ingredient)" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editIngredientForm" :id="ingredient.id + 'editButton'">Edit</button>
-                  <button @click="deleteIngredient(ingredient.id)" class="btn btn-danger btn-sm">Delete</button>
-                </div>
-              </td>
             </tr>
           </tbody>
         </table>
-        <EditIngredientForm :ingredient="selectedIngredient" v-if="selectedIngredient" :title="'ID: '" @close-modal="closeEditIngredientForm"/>
       </div>
     </div>
   </div>
@@ -78,15 +70,12 @@ import { ref } from 'vue';
 import logo from '@/assets/logo.png'; // Adjust the path based on your project structure
 import axios from 'axios'; // Make sure to import axios
 import { Modal } from 'bootstrap'
-import Swal from 'sweetalert2';
-import AddIngredientForm from './../components/AddIngredientForm.vue';
-import EditIngredientForm from './../components/EditIngredientForm.vue';
+import IngredientForm from '../components/AddIngredientForm.vue';
 
 export default {
   name: 'Ingredients',
   components: {
-    AddIngredientForm,
-    EditIngredientForm,
+    IngredientForm,
   },
   data() {
     return {
@@ -97,27 +86,19 @@ export default {
       loading: true,
       error: null,
       logo: logo,
-      selectedIngredient: {
-          id: '0',
-          name: 'NULL',
-          quantity: 0,
-          purchaseQuantity: 0,
-          costPerPurchaseUnit: 0,
-          unit: 'NULL',
-          notes: 'NULL'
-        },
     };
   },
   created() {
     this.getIngredients();
   },
   methods: {
+    
     async getIngredients() {
       this.loading = true;
       try {
         const response = await axios.get('https://bakery.permavite.com/api/inventory', {
           headers: {
-            'Authorization': `${this.apiKey}`
+            'Authorization': `${sessionStorage.getItem('SessionId')}`
           },
         });
         console.log(response);
@@ -149,32 +130,6 @@ export default {
         this.loading = false; // Set loading to false
       }
     },
-    async deleteIngredient(id) {
-      try {
-        const response = await axios.delete('https://bakery.permavite.com/api/inventory/id/'+ id, {
-          headers: {
-            'Authorization': `${this.apiKey}`,
-            scheme: 'https',
-          },
-        });
-        this.getIngredients();
-        console.log(response);
-        Swal.fire({
-          title: "Deleted!",
-          text: "",
-          icon: "success"
-        });
-      } catch (e) {
-        console.error('Error deleting item:', e);
-        Swal.fire({
-          title: "Error!",
-          text: e,
-          icon: "error"
-        });
-      } finally {
-        this.loading = false; // Set loading to false
-      }
-    },
     filterIngredients() {
       const query = this.searchQuery.toLowerCase();
       this.filteredIngredients = this.ingredients.filter(ingredient => {
@@ -183,8 +138,8 @@ export default {
         return matchesCategory && matchesQuery;
       });
     },
-    closeAddIngredientForm() {
-      const closeButton = document.getElementById('closeAddIngredientForm');
+    closeIngredientForm() {
+      const closeButton = document.getElementById('closeIngredientForm');
       closeButton.click();
       this.getIngredients();
       
@@ -193,19 +148,6 @@ export default {
       //modal.toggle();
       // You may want to also refresh the ingredients list here if necessary
     },
-    selectIngredient(ingredient) {
-      this.selectedIngredient = ingredient;
-    },
-    closeEditIngredientForm() {
-      const closeButton = document.getElementById('closeEditIngredientForm');
-      closeButton.click();
-      this.getIngredients();
-      
-      //const modalElement = document.getElementById('ingredientForm');
-      //const modal = Modal.getInstance(modalElement);    
-      //modal.toggle();
-      // You may want to also refresh the ingredients list here if necessary
-    }
   },
   mounted() {
     this.filteredIngredients = this.ingredients;
@@ -215,8 +157,6 @@ export default {
     link.rel = 'stylesheet';
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
     document.head.appendChild(link);
-
-    
   },
 };
 </script>
