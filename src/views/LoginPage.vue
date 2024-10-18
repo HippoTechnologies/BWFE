@@ -6,10 +6,10 @@
           <h2 class="text-center">Login</h2>
           <form @submit.prevent="handleSubmit">
             <div class="input-field mb-3">
-              <input type="text" name="username" id="username" class="form-control" placeholder="Username/Email" v-model="username">
+              <input type="text" name="username" id="username" class="form-control" placeholder="Username/Email" v-model="username" required>
             </div>
             <div class="input-field mb-3">
-              <input type="password" name="password" id="password" class="form-control" placeholder="Enter Your Password" v-model="password">
+              <input type="password" name="password" id="password" class="form-control" placeholder="Enter Your Password" v-model="password" required>
             </div>
             <div class="d-flex justify-content-between mb-3">
               <a href="#" class="text-decoration-none">Forgot Password?</a>
