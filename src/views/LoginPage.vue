@@ -16,7 +16,7 @@
             <div class="d-flex justify-content-between mb-3">
               <a href="#" class="text-decoration-none">Forgot Password?</a>
             </div>
-            <button type="submit" @click="loginUser">Continue</button>
+            <button type="submit" id="loginUser">Continue</button>
           </form>
           <div class="footer mt-4 text-center">
             <span>Or Connect With Social Media</span>
