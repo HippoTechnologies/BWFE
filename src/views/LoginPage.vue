@@ -84,6 +84,7 @@ export default {
       }
     } catch (e) {
       // Handle errors such as incorrect credentials
+      console.log(e);
       if (response.status == 404) {
         Swal.fire({
           title: "Failure!",
@@ -98,7 +99,7 @@ export default {
           icon: "error"
         });
       }
-      
+
       if (error.response && error.response.data.message) {
         this.errorMessage = error.response.data.message;
       } else {
