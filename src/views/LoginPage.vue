@@ -85,7 +85,7 @@ export default {
     } catch (e) {
       // Handle errors such as incorrect credentials
       console.log(e);
-      if (response.status == 404) {
+      if (e.status == 404) {
         Swal.fire({
           title: "Failure!",
           text: "Username or Password doesn't match",
