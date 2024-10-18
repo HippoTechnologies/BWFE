@@ -4,9 +4,9 @@
       <transition name="fade">
         <div v-if="!showRegistrationForm">
           <h2 class="text-center">Login</h2>
-          <form @submit.prevent="handleSubmit">
+          <form @submit.prevent="loginUser">
             <div class="input-field mb-3">
-              <input type="text" name="username" id="username" class="form-control" placeholder="Username/Email" v-model="username" required>
+              <input type="text" name="username" id="username" class="form-control" placeholder="Username" v-model="username" required>
             </div>
             <div class="input-field mb-3">
               <input type="password" name="password" id="password" class="form-control" placeholder="Enter Your Password" v-model="password" required>
