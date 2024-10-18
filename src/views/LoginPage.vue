@@ -84,11 +84,21 @@ export default {
       }
     } catch (e) {
       // Handle errors such as incorrect credentials
-      Swal.fire({
-        title: "Failure!",
-        text: "",
-        icon: "error"
-      });
+      if (response.status == 404) {
+        Swal.fire({
+          title: "Failure!",
+          text: "Username or Password doesn't match",
+          icon: "error"
+        });
+      }
+      else {
+        Swal.fire({
+          title: "Failure!",
+          text: "Failed to log in",
+          icon: "error"
+        });
+      }
+      
       if (error.response && error.response.data.message) {
         this.errorMessage = error.response.data.message;
       } else {
