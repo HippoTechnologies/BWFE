@@ -4,17 +4,19 @@
       <transition name="fade">
         <div v-if="!showRegistrationForm">
           <h2 class="text-center">Login</h2>
-          <form @submit.prevent="handleSubmit">
+          <form @submit.prevent="loginUser">
             <div class="input-field mb-3">
-              <input type="text" name="username" id="username" class="form-control" placeholder="Username/Email" v-model="username">
-            </div>
+              <label for="username" class="form-label">Username</label>
+              <input type="text" name="username" id="username" class="form-control" placeholder="Username" v-model="username" required>
+            </div>  
             <div class="input-field mb-3">
-              <input type="password" name="password" id="password" class="form-control" placeholder="Enter Your Password" v-model="password">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" name="password" id="password" class="form-control" placeholder="Enter Your Password" v-model="password" required>
             </div>
             <div class="d-flex justify-content-between mb-3">
               <a href="#" class="text-decoration-none">Forgot Password?</a>
             </div>
-            <button @click="loginUser">Continue</button>
+            <button type="submit" id="loginUser">Continue</button>
           </form>
           <div class="footer mt-4 text-center">
             <span>Or Connect With Social Media</span>
@@ -84,11 +86,22 @@ export default {
       }
     } catch (e) {
       // Handle errors such as incorrect credentials
-      Swal.fire({
-        title: "Failure!",
-        text: "",
-        icon: "error"
-      });
+      console.log(e);
+      if (e.status == 404) {
+        Swal.fire({
+          title: "Failure!",
+          text: "Username or Password doesn't match",
+          icon: "error"
+        });
+      }
+      else {
+        Swal.fire({
+          title: "Failure!",
+          text: "Failed to log in",
+          icon: "error"
+        });
+      }
+
       if (error.response && error.response.data.message) {
         this.errorMessage = error.response.data.message;
       } else {
