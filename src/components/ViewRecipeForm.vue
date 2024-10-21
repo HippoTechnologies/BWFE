@@ -117,7 +117,7 @@ export default {
           Unit = init.Unit,
           Notes = init.Notes
         */
-        const response = await axios.put('https://bakery.permavite.com/api/ingredients/recipeid/', input, { headers });
+        const response = await axios.get('https://bakery.permavite.com/api/ingredients/recipeid/', input, { headers });
         this.ingredients = response.data;
       } catch (e) {
         Swal.fire({
