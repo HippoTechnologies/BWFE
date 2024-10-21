@@ -86,19 +86,4 @@ h2 {
   cursor: pointer; /* Pointer cursor on hover */
 }
 
-
-/* Optional: Responsive adjustments */
-@media (max-width: 600px) {
-  .schedule {
-    padding: 10px; /* Reduce padding on smaller screens */
-  }
-
-  h2 {
-    font-size: 1.5em; /* Smaller heading size */
-  }
-
-  .vue-cal-event {
-    font-size: 0.9em; /* Smaller font size for events */
-  }
-}
 </style>
