@@ -124,7 +124,7 @@ export default {
       ];
       this.loading = true;
       try {
-        const response = await axios.get('https://bakery.permavite.com/api/inventory', {
+        const response = await axios.get('https://bakery.permavite.com/api/recipes', {
           headers: {
             'Authorization': `${sessionStorage.getItem('SessionId')}`
           },
@@ -169,7 +169,7 @@ export default {
     },
     async deleteRecipe(id) {
       try {
-        const response = await axios.delete('https://bakery.permavite.com/api/inventory/id/'+ id, {
+        const response = await axios.delete('https://bakery.permavite.com/api/recipes/'+ id, {
           headers: {
             'Authorization': `${sessionStorage.getItem("SessionId")}`,
             scheme: 'https',

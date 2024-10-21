@@ -107,7 +107,7 @@ export default {
           Unit = init.Unit,
           Notes = init.Notes
         */
-        const response = await axios.post('https://bakery.permavite.com/api/inventory', input, { headers });
+        const response = await axios.post('https://bakery.permavite.com/api/recipes', input, { headers });
 
 
         this.$emit('close-modal');

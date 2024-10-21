@@ -14,33 +14,7 @@
 
           <div class="modal-body">
             <form @submit.prevent="viewRecipe">
-              <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" v-model="name" required>
-              </div>
-              <div class="mb-3">
-                <label for="quantity" class="form-label">Description</label>
-                <input type="text" step="0.01" class="form-control" id="quantity" v-model="description" required>
-              </div>
-              <div class="mb-3">
-                <label for="purchaseQuantity" class="form-label">Rating</label>
-                <input type="number" step="0.01" class="form-control" id="purchaseQuantity" v-model="rating" required>
-              </div>
-              <div class="mb-3">
-                <label for="costPerPurchaseUnit" class="form-label">Prep Time</label>
-                <input type="number" step="0.01" class="form-control" id="costPerPurchaseUnit" v-model="prepTime" required>
-              </div>
-              <div class="mb-3">
-                <label for="costPerPurchaseUnit" class="form-label">Prep Unit</label>
-                <input type="text" step="0.01" class="form-control" id="costPerPurchaseUnit" v-model="prepUnit" required>
-              </div>
-              <div class="mb-3">
-                <label for="unit" class="form-label">Cook Time</label>
-                <input type="number" class="form-control" id="unit" v-model="cookTime" required>
-              </div>
-              <div class="mb-3">
-                <label for="unit" class="form-label">Cook Unit</label>
-                <input type="text" class="form-control" id="unit" v-model="cookUnit" required>
+              <div class="ingredients"> 
               </div>
               <button id="submitRecipe" type="submit" class="btn btn-primary w-100" data-bs-dismiss="">Edit</button>
             </form>
