@@ -31,7 +31,7 @@
                 <div class="recipe-details">
                   <h3>{{ recipe.name }}</h3>
                   <p><strong></strong> {{ recipe.description }}</p>
-                  <p><strong></strong> ${{ recipe.price.toFixed(2) }}</p>
+                  <!--<p><strong></strong> ${{ recipe.price.toFixed(2) }}</p>-->
                   <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" :data-bs-target="'#recipeModal' + recipe.id">
                     View Recipe
                   </button>
@@ -62,7 +62,7 @@
               <img :src="recipe.image" alt="Recipe Image" class="img-fluid mb-3" />
               <p><strong>Ingredients:</strong> {{ recipe.ingredients.join(', ') }}</p>
               <p><strong>Description:</strong> {{ recipe.description }}</p>
-              <p><strong>Price:</strong> ${{ recipe.price.toFixed(2) }}</p>
+              <!--<p><strong>Price:</strong> ${{ recipe.price.toFixed(2) }}</p>-->
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -89,7 +89,7 @@ export default {
     return {
       searchQuery: '',
       selectedCategory: '',
-      priceRange: 20, // Default max price
+      //priceRange: 20, // Default max price
       recipes: [],
       filteredRecipes: [],
       loading: true,
@@ -167,8 +167,8 @@ export default {
       this.filteredRecipes = this.recipes.filter(recipe => {
         const matchesCategory = this.selectedCategory ? recipe.category === this.selectedCategory : true;
         const matchesQuery = recipe.name.toLowerCase().includes(query);
-        const matchesPrice = recipe.price <= this.priceRange;
-        return matchesCategory && matchesQuery && matchesPrice;
+        //const matchesPrice = recipe.price <= this.priceRange;
+        return matchesCategory && matchesQuery //&& matchesPrice;
       });
     },
     addToCart(recipe) {
