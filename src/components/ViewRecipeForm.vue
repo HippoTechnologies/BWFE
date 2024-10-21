@@ -13,17 +13,25 @@
           </div>
 
           <div class="modal-body">
-            <form @submit.prevent="getRecipe">
+            <form @submit.prevent="getIngredients">
               
               <div class="ingredients">
                 <h5>Ingredients:</h5>
                 <ul>
                   <li v-for="ingredient in ingredients" :key="ingredient.id">
-                    {{ ingredient.name }} ({{ ingredient.quantity }} {{ ingredient.minQuantity }} {{ ingredient.unit }})
+                    {{ ingredient.name }} (Quantity: {{ ingredient.quantity }} Minimum Quantity: {{ ingredient.minQuantity }} Unit: {{ ingredient.unit }})
                   </li>
                 </ul>
               </div>
 
+              <div class="cooksteps">
+                <h5>Cooksteps:</h5>
+                <ul>
+                  <li v-for="cookstep in cooksteps" :key="cookstep.id">
+                    {{ ingredient.id }} ({{ ingredient.description }})
+                  </li>
+                </ul>
+              </div>
 
               <button id="submitRecipe" type="submit" class="btn btn-primary w-100" data-bs-dismiss="">Edit</button>
             </form>
@@ -61,35 +69,48 @@ export default {
       default: () => ({
           id: '0',
         }),
+    },
     ingredient: {
       type: Object,
       default: () => ({
         //{{ ingredient.name }} ({{ ingredient.quantity }} {{ ingredient.minQuantity }} {{ ingredient.unit }})
         id: '0',
+        recipeId: '',
+        inventoryId: '',
         name: '',
         quantity: 0,
         minQuantity: 0,
         unit: '',
       }),
-    }
-    }
+    },
+    cookstep: {
+      type: Object,
+      default: () => ({
+        //{{ ingredient.name }} ({{ ingredient.quantity }} {{ ingredient.minQuantity }} {{ ingredient.unit }})
+        id: '0',
+        description: '',
+      }),
+    },
   },
   data() {
     return {
       id: '0',
       ingredients: [], // New data property for ingredients
+      cooksteps: [],
     };
   },
   created() {
     this.populateForm();
-    this.getRecipe();
+    this.getIngredients();
+    this.getCooksteps();
   },
   watch: {
     recipe: {
       immediate: true,
       handler() {
         this.populateForm();
-        this.getRecipe();
+        this.getIngredients();
+        this.getCooksteps();
       }
     }
   },
@@ -97,7 +118,7 @@ export default {
     populateForm() {
       this.id = this.recipe.id;
     },
-    async getRecipe() {
+    async getIngredients() {
       const headers = {
           'Content-Type': 'application/json', // Specify content type
           'Authorization': `${sessionStorage.getItem('SessionId')}`, // Add an authorization token
@@ -119,6 +140,36 @@ export default {
         */
         const response = await axios.get('https://bakery.permavite.com/api/ingredients/recipeid/' + this.id, { headers });
         this.ingredients = response.data;
+      } catch (e) {
+        Swal.fire({
+          title: "Error!",
+          text: e,
+          icon: "error"
+        });
+      };
+    },
+    async getCooksteps() {
+      const headers = {
+          'Content-Type': 'application/json', // Specify content type
+          'Authorization': `${sessionStorage.getItem('SessionId')}`, // Add an authorization token
+      };
+      var input = {
+        recipeId: this.id,
+      }
+      console.log(input);
+
+      try {
+        /* 
+          Id = Guid.NewGuid().ToString(),
+          Name = init.Name,
+          Quantity = init.Quantity,
+          PurchaseQuantity = init.PurchaseQuantity,
+          CostPerPurchaseUnit = init.CostPerPurchaseUnit,
+          Unit = init.Unit,
+          Notes = init.Notes
+        */
+        const response = await axios.get('https://bakery.permavite.com/api/cookstep/recipeid/' + this.id, { headers });
+        this.cooksteps = response.data;
       } catch (e) {
         Swal.fire({
           title: "Error!",
