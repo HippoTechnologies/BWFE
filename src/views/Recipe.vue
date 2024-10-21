@@ -116,12 +116,6 @@ export default {
   methods: {
 
     async getRecipes() {
-      this.recipes = [
-        { id: 1, name: 'German Chocolate Cake', description: 'German cake', rating: '5', prepTime: "80", prepUnit: "hrs", cookTime: "20", cookUnit: "minutes"},
-        { id: 2, name: 'Lemon Tart', description: 'Tart sweet', rating: '5', prepTime: "80", prepUnit: "hrs", cookTime: "20", cookUnit: "minutes" },
-        { id: 3, name: 'Tres Leches', description: '3 milk cake', rating: '5', prepTime: "80", prepUnit: "hrs", cookTime: "20", cookUnit: "minutes" },
-        { id: 4, name: 'Croissant', description: 'Flaky and rich bread', rating: '5', prepTime: "80", prepUnit: "hrs", cookTime: "20", cookUnit: "minutes" },
-      ];
       this.loading = true;
       try {
         const response = await axios.get('https://bakery.permavite.com/api/recipes', {
