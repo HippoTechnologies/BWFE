@@ -78,6 +78,10 @@
 import { ref } from 'vue';
 import logo from '@/assets/logo.png';
 import axios from 'axios';
+import { Modal } from 'bootstrap';
+import Swal from 'sweetalert2';
+import AddRecipeForm from './../components/AddRecipeForm.vue';
+import EditRecipeForm from './../components/EditRecipeForm.vue';
 
 export default {
   name: 'Recipe',
@@ -86,12 +90,20 @@ export default {
       searchQuery: '',
       selectedCategory: '',
       priceRange: 20, // Default max price
-      recipes: [
-        { id: 1, name: 'Chocolate Cake', description: 'A rich and moist chocolate cake.', ingredients: ['Flour', 'Sugar', 'Cocoa'], price: 15.00, image: 'src/assets/images/img11.JPG', category: 'Cakes' },
-        { id: 2, name: 'Croissant', description: 'Flaky and buttery croissants.', ingredients: ['Flour', 'Sugar', 'Vanilla'], price: 10.00, image: 'src/assets/images/img22.JPG', category: 'Cupcakes' },
-        { id: 3, name: 'Cupcake', description: 'Delicious chocolate cupcakes.', ingredients: ['Flour', 'Lemon', 'Sugar'], price: 12.00, image: 'src/assets/images/img33.JPG', category: 'Tarts' },
-      ],
-      filteredRecipes: []
+      recipes: [],
+      filteredRecipes: [],
+      loading: true,
+      error: null,
+      logo: logo,
+      selectedRecipe: {
+        name: 'NULL',
+        description: 'NULL',
+        prepUnit: 'NULL',
+        cookUnit: 'NULL',
+        rating: 0,
+        prepTime: 0,
+        cookTime: 0
+      }
     };
   },
   setup() {
@@ -108,7 +120,7 @@ export default {
       try {
         const response = await axios.get('https://bakery.permavite.com/api/recipes', {
           headers: {
-            'Authorization': `${this.apiKey}`
+            'Authorization': `${sessionStorage.getItem('SessionId')}`
           },
         });
         console.log(response);
@@ -117,16 +129,18 @@ export default {
         console.log(response.data)
         this.$emit('close');
       } catch (error) {
-        console.error('Error retrieving ingredients:', error);
+        console.error('Error retrieving recipes:', error);
+        this.recipes = []
       } finally {
         this.loading = false;
       }
     },
     async deleteRecipe(id) {
       try {
+        this.loading = true;
         const response = await axios.delete('https://bakery.permavite.com/api/recipes/id/'+ id, {
           headers: {
-            'Authorization': `${this.apiKey}`,
+            'Authorization': `${sessionStorage.getItem('SessionId')}`,
             scheme: 'https',
           },
         });
@@ -159,6 +173,16 @@ export default {
     },
     addToCart(recipe) {
       alert(`${recipe.name} added to cart!`);
+    },
+    closeAddRecipeForm(){
+      const closeButton = document.getElementById('closeAddRecipeForm');
+      closeButton.click();
+      this.getRecipes();
+    },
+    closeEditRecipeForm(){
+      const closeButton = document.getElementById('closeEditRecipeForm');
+      closeButton.click();
+      this.getRecipes();
     }
   },
   mounted() {
