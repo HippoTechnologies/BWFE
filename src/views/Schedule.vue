@@ -67,16 +67,17 @@ export default {
 
 h2 {
   text-align: center; /* Center the heading */
-  color: #CDC69A; /* Darker color for the heading */
+  color: #CDC69A !important; /* Darker color for the heading */
   margin-bottom: 20px; /* Space below the heading */
 }
 
 /* Add some custom styles for events */
 .vue-cal-event {
   background-color: #290102; /* Green color for events */
-  color: #CDC69A; /* White text for better contrast */
+  color: #CDC69A !important; /* White text for better contrast */
   border-radius: 4px; /* Rounded corners for events */
   padding: 5px 10px; /* Padding inside events */
+  font-size: 1em; 
 }
 
 /* Optional: Hover effect for events */
