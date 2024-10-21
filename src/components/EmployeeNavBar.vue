@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
     <div class="container-fluid">
       <a class="navbar-brand fancy-font" href="#">
-        <img src="@/assets/images/HippoTech2.png" alt="Bakery Logo" style="height: 110px;">
+        <img src="@/assets/images/HippoTech2.png" alt="Bakery Logo" style="height: 95px;">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#employeeNavbarNav" aria-controls="employeeNavbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
