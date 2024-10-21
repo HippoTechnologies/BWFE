@@ -19,8 +19,8 @@
           <label for="password" class="form-label">Password</label>
           <input type="password" class="form-control" id="password" v-model="password" required>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Register</button>
-        <button type="button" class="btn btn-secondary w-100 mt-2" @click="$emit('close')">Cancel</button>
+        <button type="submit" class="btn register-btn w-100">Register</button>
+        <button type="button" class="btn cancel-btn w-100 mt-2" @click="$emit('close')">Cancel</button>
       </form>
     </div>
   </transition>
@@ -69,15 +69,46 @@ export default {
 
 <style scoped>
 .registration-form {
-  max-width: 400px;
+  max-width: 800px;
+  border-radius: 8px; 
   margin: auto;
-  padding: 20px;
-  background: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background: #FFFDEF;
+  color: #290102;
 }
+
+.register-btn {
+  background-color: #290102; /* Change this to your desired register button background color */
+  color: white; /* Change this to your desired register button text color */
+  border: none; /* Remove border */
+  border-radius: 4px; 
+  padding: 10px 20px; 
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.register-btn:hover {
+  background-color: wheat; /* Optional: Change background color on hover */
+  color: #290102;
+}
+
+.cancel-btn {
+  background-color: #CDC69A; /* Change this to your desired cancel button background color */
+  color: #290102; /* Change this to your desired cancel button text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Optional: Add rounded corners */
+  padding: 10px 20px; /* Optional: Add padding inside the button */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.cancel-btn:hover {
+  background-color: #999; /* Optional: Change background color on hover */
+  color: white;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s ease;
 }
+
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }

@@ -15,7 +15,7 @@
         </div>
         <div class="controls mt-3">
           <input v-model="searchQuery" type="text" placeholder="Search ingredients..." class="form-control" />
-          <button @click="filterIngredients" class="btn btn-primary mt-2 w-100">Filter</button>
+          <button @click="filterIngredients" class="btn filter-btn mt-2 w-100">Filter</button>
         </div>
       </div>
 
@@ -91,110 +91,6 @@ export default {
 <style scoped>
 .ingredients-container {
   padding: 20px;
-  background-color: #acd0df;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #ffffff;
-  color: #000000;
-}
-
-.nav-links {
-  display: flex;
-  width: 100%;
-  list-style-type: none;
-  justify-content: space-between;
-}
-
-.left-section {
-  display: flex;
-  align-items: center;
-}
-
-.welcome-text {
-  margin-left: 10px;
-}
-
-.logo {
-  height: 40px;
-  margin-right: 10px;
-}
-
-.center-section {
-  display: flex;
-  align-items: center;
-}
-
-.right-section {
-  display: flex;
-  align-items: center;
-}
-
-.dropdown {
-  position: relative;
-}
-
-.dropbtn {
-  background-color: #dadada;
-  padding: 14px 20px;
-  font-size: 16px;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  min-width: 160px;
-  z-index: 1;
-}
-
-.dropdown-content a {
-  padding: 12px 16px;
-  display: block;
-  text-decoration: none;
-  color: #000;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.nav-link {
-  padding: 14px 20px;
-  text-decoration: none;
-  color: #000;
-}
-
-.nav-link:hover {
-  background-color: #575757;
-}
-
-/* Search Section */
-.search-section {
-  display: flex;
-  align-items: center;
-}
-
-.search-input {
-  padding: 5px;
-  border-radius: 4px;
-}
-
-.search-button {
-  padding: 6px 10px;
-  background-color: #ff9933;
-  border-radius: 4px;
-  color: #000;
-  margin-left: 5px;
-}
-
-.search-button:hover {
-  background-color: #e68a00;
 }
 
 /* Styles for the filter section and ingredients table */
@@ -204,7 +100,6 @@ export default {
 
 .filter-section {
   width: 250px;
-  background-color: #acd0df;
   border-radius: 10px;
   padding: 20px;
   margin-right: 20px;
@@ -212,7 +107,8 @@ export default {
 
 .ingredients-table {
   flex-grow: 1;
-  background-color: #ffffff;
+  background-color: #FFFDEF;
+  color: #290102;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -235,6 +131,20 @@ th {
 
 tr:nth-child(even) {
   background-color: #f9f9f9;
+}
+
+.filter-btn{
+  background-color: #290102;
+  color: #FFFDEF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  background-color: #FFFDEF;
+  color: #290102;
 }
 
 @media (max-width: 768px) {

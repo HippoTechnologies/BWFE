@@ -29,9 +29,10 @@ export default {
 
 <style>
 html, body, #app {
-  background-color: #a2b9bc;
+  background-color: #A7292F;
   margin: 0;
   padding: 0;
   height: 100%;
+  color: #CDC69A;
 }
 </style>

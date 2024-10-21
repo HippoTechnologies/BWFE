@@ -35,20 +35,18 @@ export default {
 
 <style scoped>
 /* Apply template background color */
-.admin-container {
+.admin-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #acd0df;
+    margin-top: -150px;
   }
-
-/* Center content in the admin-page */
-
 
 /* Style for the modal content */
 .modal-content {
-  background-color: #ffffff; /* Background for the modal */
+  background-color: #A7292F; /* Background for the modal */
+  color: #290102;
   border-radius: 10px;
   padding: 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

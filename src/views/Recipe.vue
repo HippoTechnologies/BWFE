@@ -125,29 +125,6 @@ export default {
 </script>
 
 <style scoped>
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #ffffff;
-  color: #000000;
-}.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #ffffff;
-  color: #000000;
-}
-
-.nav-links {
-  display: flex;
-  width: 100%;
-  list-style-type: none;
-  justify-content: space-between;
-}
-
 .left-section {
   display: flex;
   align-items: center;
@@ -202,16 +179,6 @@ export default {
   display: block;
 }
 
-.nav-link {
-  padding: 14px 20px;
-  text-decoration: none;
-  color: #000;
-}
-
-.nav-link:hover {
-  background-color: #575757;
-}
-
 /* Search Section */
 .search-section {
   display: flex;
@@ -261,7 +228,6 @@ export default {
 
 .recipe-container {
   padding: 20px;
-  background-color: #96cde2;
 }
 
 .d-flex {
@@ -271,7 +237,6 @@ export default {
 
 .filter-section {
   width: 250px;
-  background-color: #96cde2;
   border-radius: 10px;
   padding: 20px;
   margin-right: 20px;

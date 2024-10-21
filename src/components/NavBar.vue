@@ -1,7 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light custom-navbar">
+  <nav class="navbar custom-navbar navbar-expand-lg">
     <div class="container-fluid">
-      <img src="@/assets/images/HippoTechLogo.png" alt="Bakery Logo" style="height: 100px;">
+      <a class="navbar-brand fancy-font" href="#">
+        <img src="@/assets/images/HippoTech2.png" alt="Bakery Logo" class="logo-image">
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -31,7 +33,7 @@
 
 <script>
 export default {
-  name: 'AppNavBar',
+  name: 'NavBar',
   data() {
     return {
       cartItemCount: 0 // Initialize cartItemCount
@@ -46,13 +48,23 @@ export default {
   font-size: 1.5rem; /* Increased font size */
 }
 
-.fancy-font {
-  font-family: 'Pacifico', cursive;
-  font-size: 2rem; /* Adjust the size as needed */
+.navbar {
+  background-color: #FFFDEF; 
+  color: #290102;
+}
+
+.navbar a {
+  color: #290102; /* Set nav links color */
+}
+
+.logo-image {
+  height: 110px; /* Adjust the height as needed */
+  width: auto; /* Maintain aspect ratio */
 }
 
 .cart-icon {
   position: relative;
+  left: -10px; /* Adjust the position */
   display: flex;
   align-items: center;
   font-size: 2rem; /* Increased cart icon size */
@@ -61,11 +73,11 @@ export default {
 .cart-icon .badge {
   position: absolute;
   top: -10px;
-  right: -10px;
+  right: -15px;
   font-size: 0.75rem; /* Smaller badge size */
   padding: 0.25em 0.5em; /* Adjust padding for better appearance */
   border-radius: 50%; /* Make the badge round */
-  background-color: red; /* Ensure the badge has a background color */
-  color: white; /* Ensure the text color is white */
+  color: #290102; /* Ensure the text color is white */
+  background-color: #CDC69A !important;
 }
 </style>

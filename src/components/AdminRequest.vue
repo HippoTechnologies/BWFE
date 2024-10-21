@@ -40,7 +40,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #acd0df;
+    background-color: #A7292F;
   }
 
 /* Center content in the admin-page */
@@ -48,13 +48,15 @@ export default {
 
 /* Style for the modal content */
 .modal-content {
-  background-color: #ffffff; /* Background for the modal */
+  background-color: #FFFDEF; /* Background for the modal */
+  color: #290102;
   border-radius: 10px;
   padding: 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
   height: 300px;
-  width: 500px
+  width: 500px;
+  margin-top: -200px;
 }
 
 /* Style for the heading */

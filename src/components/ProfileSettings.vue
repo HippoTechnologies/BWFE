@@ -53,11 +53,13 @@ export default {
 
 /* Apply global background color */
 .profile-page {
-  background-color: #acd0df;
+  background-color: #FFFDEF;
+  color: #290102;
   padding: 40px 20px;
   border-radius: 10px;
   max-width: 600px;
   margin: 0 auto;
+  margin-top: 80px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -94,40 +96,55 @@ h2 {
   color: #555;
 }
 
+.edit-profile {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
 /* Edit profile button */
 .edit-profile button {
   display: block;
   width: 100%;
+  margin: 10px;
   padding: 12px 0;
   font-size: 1.2rem;
-  background-color: #3498db;
-  color: #fff;
+  background-color: #290102;
+  color: #FFFDEF;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .edit-profile button:hover {
-  background-color: #2980b9;
+  background-color: #CDC69A;
+  color: #290102;
   transition: background-color 0.3s ease;
 }
 
 /* Change password link button */
 .change-password-link {
-  text-align: center;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
 .change-password-link .btn {
-  background-color: #e74c3c;
-  color: white;
-  padding: 12px 20px;
-  text-decoration: none;
+  display: block;
+  width: 100%;
+  margin: 10px;
+  padding: 12px 0;
+  font-size: 1.2rem;
+  background-color: #290102;
+  color: #FFFDEF;
+  border: none;
   border-radius: 5px;
-  font-size: 1rem;
+  cursor: pointer;
 }
 
 .change-password-link .btn:hover {
-  background-color: #c0392b;
+  background-color: #CDC69A;
+  color: #290102;
   transition: background-color 0.3s ease;
 }
 </style>
