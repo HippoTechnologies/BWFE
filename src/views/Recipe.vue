@@ -252,7 +252,7 @@ export default {
 <style scoped>
 .recipes-container {
   padding: 20px;
-  background-color: #acd0df;
+  background-color: #a7292f;
 }
 
 .navbar {
@@ -365,7 +365,7 @@ export default {
 
 .filter-section {
   width: 250px;
-  background-color: #acd0df;
+  background-color: #a7292f;
   border-radius: 10px;
   padding: 20px;
   margin-right: 20px;
