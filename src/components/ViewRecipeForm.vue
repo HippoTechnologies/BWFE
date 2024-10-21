@@ -102,7 +102,6 @@ export default {
           'Content-Type': 'application/json', // Specify content type
           'Authorization': `${sessionStorage.getItem('SessionId')}`, // Add an authorization token
       };
-      console.log(input);
 
       try {
         /* 
@@ -114,7 +113,7 @@ export default {
           Unit = init.Unit,
           Notes = init.Notes
         */
-        const response = await axios.put('https://bakery.permavite.com/api/ingredients/recipeid/' + this.id, input, { headers });
+        const response = await axios.put('https://bakery.permavite.com/api/ingredients/recipeid/' + this.id, { headers });
         this.ingredients = response.data;
       } catch (e) {
         Swal.fire({
