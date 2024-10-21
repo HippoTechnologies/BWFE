@@ -1,7 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light custom-navbar">
+  <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
     <div class="container-fluid">
-      <a class="navbar-brand fancy-font" href="#">Bakery</a>
+      <a class="navbar-brand fancy-font" href="#">
+        <img src="@/assets/images/HippoTech2.png" alt="Bakery Logo" style="height: 110px;">
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#employeeNavbarNav" aria-controls="employeeNavbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -56,9 +58,13 @@ export default {
   font-size: 1.5rem; /* Increased font size */
 }
 
-.fancy-font {
-  font-family: 'Pacifico', cursive;
-  font-size: 2rem; /* Adjust the size as needed */
+.navbar {
+  background-color: #FFFDEF; 
+  color: #290102;
+}
+
+.navbar .nav-link {
+  color: #290102; /* Set nav links color */
 }
 
 .navbar-menu li {
@@ -71,7 +77,7 @@ export default {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #fff;
+  background-color: #FFFDEF;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   list-style: none;
   padding: 10px 0;
@@ -88,11 +94,12 @@ export default {
 
 .dropdown-menu a {
   font-size: 1.25rem; /* Make dropdown links the same size */
+  color: #290102;
 }
 
 .navbar-settings a {
   text-decoration: none;
-  color: #333;
+  color: #290102;
   margin-left: 10px; /* Adjust margin-left to move it slightly left */
 }
 </style>

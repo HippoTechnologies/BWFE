@@ -77,8 +77,8 @@ export default {
               {
                 label: `${itemName} Sales ($) for ${selectedYear.value}`,
                 data: data,
-                backgroundColor: 'rgba(255, 153, 51, 0.6)',
-                borderColor: 'rgba(255, 153, 51, 1)',
+                backgroundColor: '#290102',
+                borderColor: '#290102',
                 borderWidth: 2,
                 fill: false,
                 tension: 0.1
@@ -89,24 +89,37 @@ export default {
             responsive: true,
             plugins: {
               legend: {
+                labels: {
+                  color: '#CDC69A' 
+                },
                 display: true,
                 position: 'top',
               },
               title: {
                 display: true,
                 text: `Sales Data for ${itemName} in ${selectedYear.value}`,
+                color: '#CDC69A',
+                font: {
+                  size: 18,
+                }
               },
             },
             scales: {
               y: {
                 beginAtZero: true,
                 ticks: {
-                  color: '#333',
+                  color: '#CDC69A',
+                },
+                grid: {
+                  color: '#CDC69A', // Change this to your desired y-axis grid line color
                 },
               },
               x: {
                 ticks: {
-                  color: '#333',
+                  color: '#CDC69A',
+                },
+                grid: {
+                  color: '#CDC69A', // Change this to your desired y-axis grid line color
                 },
               },
             },
@@ -133,5 +146,19 @@ export default {
 </script>
 
 <style scoped>
-/* Styles remain unchanged */
+.sales-page {
+  padding: 20px;
+}
+
+.select-container {
+  margin-bottom: 20px; /* Adjust the spacing between dropdowns */
+}
+
+#itemSelect, #yearSelect {
+  padding: 0.5px;
+  margin: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
 </style>

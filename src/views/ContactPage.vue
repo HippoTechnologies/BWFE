@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-5 d-flex justify-content-center">
-    <div class="contact-form p-4 bg-light rounded">
+    <div class="contact-form p-4 rounded">
       <h2 class="text-center">Have a Question?</h2>
       <form @submit.prevent="handleSubmit">
         <div class="mb-3">
@@ -44,5 +44,16 @@ export default {
 .contact-form {
   max-width: 500px;
   width: 100%;
+  background-color: #FFFDEF;
+  color: #290102;
+}
+.contact-form button[type="submit"] {
+  background-color: #290102; 
+  border: none;
+}
+
+.contact-form button[type="submit"]:hover {
+  background-color: #FFFDEF; /* Change to your desired hover background color */
+  color: #290102; /* Change to your desired hover text color */
 }
 </style>

@@ -16,7 +16,7 @@
             <div class="d-flex justify-content-between mb-3">
               <a href="#" class="text-decoration-none">Forgot Password?</a>
             </div>
-            <button type="submit" id="loginUser">Continue</button>
+            <button class="btn login-form-btn w-100" @click="login">Continue</button>
           </form>
           <div class="footer mt-4 text-center">
             <span>Or Connect With Social Media</span>
@@ -125,12 +125,56 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  background-color: #FFFDEF; 
+  color: #290102;
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 600px; /* Adjust this value to make the container wider */
+  height: auto; /* Adjust this value to make the container taller */
+  padding: 30px; 
+  margin: auto;
+}
+
+.login-form {
+  max-width: 500px;
+  width: 100%;
+  background-color: #CDC69A;
+  color: #290102;
+}
+
+.login-form-btn{
+  background-color: #290102; /* Change to your desired background color */
+  color: #FFFDEF; /* Change to your desired text color */
+  border: none; /* Remove border if desired */
+  padding: 10px 20px; /* Adjust padding as needed */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.login-form-btn:hover {
+  background-color: #CDC69A; /* Change to your desired hover background color */
+  color: #290102; /* Change to your desired hover text color */
+}
+
+/* Social media icon styling */
+.social-fields .btn{
+  color: #290102; /* Change this to your desired brown color */
+  border-color: #290102;
+}
+
+.social-fields .btn:hover {
+  background-color: #CDC69A; /* Change this to your desired hover background color */
+  color: #290102; /* Change this to your desired hover text color */
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s ease;
 }
+
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
 #app {
   padding-top: 60px; /* Adjust this value to control the distance from the navbar */
 }

@@ -9,37 +9,8 @@
         <p><strong>Name:</strong> {{ userProfile.name }}</p>
         <p><strong>Email:</strong> {{ userProfile.email }}</p>
         <!-- Link to Profile Page -->
-        <router-link to="/profile" class="profile-link btn">Go to Profile</router-link>
-      </section>
-
-      <!-- Upload Recipes and Ingredients (restricted to staff) -->
-      <section v-if="isEmployee" class="upload-section">
-        <h2>Upload Recipes and Ingredients</h2>
-        <div class="upload-form">
-          <label for="recipeUpload">Upload Recipe:</label>
-          <input type="file" id="recipeUpload" @change="uploadRecipe">
-          <label for="ingredientsUpload">Upload Ingredients:</label>
-          <input type="file" id="ingredientsUpload" @change="uploadIngredients">
-        </div>
-      </section>
-
-      <!-- Remove Recipes and Ingredients (restricted to staff) -->
-      <section v-if="isEmployee" class="remove-section">
-        <h2>Remove Recipes and Ingredients</h2>
-        <div class="remove-form">
-          <label for="removeRecipeSelect">Select Recipe to Remove:</label>
-          <select id="removeRecipeSelect" v-model="selectedRecipe">
-            <option v-for="recipe in recipes" :key="recipe.id" :value="recipe">{{ recipe.name }}</option>
-          </select>
-          <button @click="removeRecipe" class="btn">Remove Recipe</button>
-
-          <label for="removeIngredientSelect">Select Ingredient to Remove:</label>
-          <select id="removeIngredientSelect" v-model="selectedIngredient">
-            <option v-for="ingredient in ingredients" :key="ingredient.id" :value="ingredient">{{ ingredient.name }}</option>
-          </select>
-          <button @click="removeIngredient" class="btn">Remove Ingredient</button>
-          <button class="btn btn-danger" @click="logout">Logout</button>
-        </div>
+        <router-link to="/profile" class="profile-link btn profile-btn">Go to Profile</router-link>
+        <button class="btn logout-btn" @click="logout">Logout</button>
       </section>
 
       <!-- Link to Request Admin Page -->
@@ -83,48 +54,12 @@ export default {
       // Implement search logic here
     };
 
-    const uploadRecipe = (event) => {
-      const file = event.target.files[0];
-      console.log('Recipe file uploaded:', file);
-    };
-
-    const uploadIngredients = (event) => {
-      const file = event.target.files[0];
-      console.log('Ingredients file uploaded:', file);
-    };
-
-    const removeRecipe = () => {
-      if (selectedRecipe.value) {
-        console.log('Removing recipe:', selectedRecipe.value.name);
-        // Logic to remove the selected recipe from inventory
-      } else {
-        alert('Please select a recipe to remove.');
-      }
-    };
-
-    const removeIngredient = () => {
-      if (selectedIngredient.value) {
-        console.log('Removing ingredient:', selectedIngredient.value.name);
-        // Logic to remove the selected ingredient from inventory
-      } else {
-        alert('Please select an ingredient to remove.');
-      }
-    };
-
     return {
       logo,
       userProfile,
       isEmployee,
       searchQuery,
-      selectedRecipe,
-      selectedIngredient,
-      recipes,
-      ingredients,
       handleSearch,
-      uploadRecipe,
-      uploadIngredients,
-      removeRecipe,
-      removeIngredient,
       logout
     };
   },
@@ -134,43 +69,20 @@ export default {
 <style scoped>
 /* Main container with full background color */
 .settings-page-container {
-  background-color: #acd0df; /* Apply light blue background to the whole page */
   min-height: 100vh; /* Ensure it covers the full viewport */
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-
-.left-section {
-  display: flex;
-  align-items: center;
-}
-
-.welcome-text {
-  margin-left: 10px;
-}
-
-.logo {
-  height: 40px;
-  margin-right: 10px;
-}
-
-.center-section {
-  display: flex;
-  align-items: center;
-}
-
-.inventory-section {
-  position: relative;
+  margin-top: -150px;
 }
 
 /* Settings section with white background */
 .settings-page {
-  width: 800px;
+  width: 650px;
   margin: 0 auto;
   padding: 40px 20px;
-  background-color: #f9f9f9; /* Keep the white background for the section */
+  background-color: #FFFDEF; /* Keep the white background for the section */
+  color: #290102;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -198,14 +110,19 @@ h2 {
 /* Button styling */
 .btn {
   display: inline-block;
-  background-color: #ff9933;
-  color: white;
+  background-color: #290102;
+  color: #FFFDEF;
   padding: 10px 15px;
   border-radius: 4px;
   text-decoration: none;
 }
 
+.logout-btn {
+  margin-left: 20px;
+}
+
 .btn:hover {
-  background-color: #e68a00;
+  background-color: #CDC69A;
+  color: #290102;
 }
 </style>
