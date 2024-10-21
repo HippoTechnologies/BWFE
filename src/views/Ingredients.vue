@@ -29,7 +29,7 @@
               <h2>Ingredients</h2>
             </b-col>
             <b-col cols="auto">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addIngredientForm">
+              <button type="button" class="btn add-ingredient-btn" data-bs-toggle="modal" data-bs-target="#addIngredientForm">
                 Add Ingredient
               </button>
             </b-col>
@@ -265,6 +265,20 @@ th {
 
 tr:nth-child(even) {
   background-color: #f9f9f9;
+}
+
+.add-ingredient-btn {
+  background-color: #290102;
+  color: #FFFDEF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-ingredient-btn:hover {
+  background-color: #FFFDEF;
+  color: #290102;
 }
 
 .filter-btn{
