@@ -28,7 +28,7 @@
                 <h5>Cooksteps:</h5>
                 <ul>
                   <li v-for="cookstep in cooksteps" :key="cookstep.id">
-                    {{ ingredient.id }} ({{ ingredient.description }})
+                    {{ cookstep.id }} ({{ cookstep.description }})
                   </li>
                 </ul>
               </div>
