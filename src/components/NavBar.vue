@@ -58,7 +58,7 @@ export default {
 }
 
 .logo-image {
-  height: 110px; /* Adjust the height as needed */
+  height: 95px; /* Adjust the height as needed */
   width: auto; /* Maintain aspect ratio */
 }
 
